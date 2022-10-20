@@ -1,21 +1,23 @@
 import Brand from "./Brand.svg";
 import styled from "styled-components";
 
-export default function LoginPage() {
+export default function RegistrationPage() {
     return (
         <LoginStyles>
             <img src={Brand}/>
             <form>
                 <input type="email" placeholder="email"/>
                 <input type="password" placeholder="senha"/>
-                <input type="submit" value="Entrar"/>
+                <input type="text" placeholder="nome"/>
+                <input type="text" placeholder="foto"/>
+                <input type="submit" value="Cadastrar"/>
             </form>
-            <p>Não tem uma conta? Cadastre-se!</p>
+            <p>Já tem uma conta? Faça login!</p>
         </LoginStyles>
     );
 }
 
-const LoginStyles = styled.div`
+const LoginStyles = styled.main`
     margin-top: 68px;
     width: 100%;
     display: flex;
@@ -33,7 +35,7 @@ const LoginStyles = styled.div`
         align-items: center;
         row-gap: 6px;
 
-        input:nth-of-type(-n+2) {
+        input:nth-of-type(-n+4) {
             width: 100%;
             height: 45px;
             padding-left: 11px;
