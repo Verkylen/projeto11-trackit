@@ -3,18 +3,25 @@ import LoginPage from "./LoginPage";
 import GlobalStyle from "./GlobalStyle";
 import RegistrationPage from "./RegistrationPage";
 import HabitsPage from "./HabitsPage";
+import TodayPage from "./TodayPage";
+import HistoryPage from "./HistoryPage";
+import UserDataProvider from "./Context";
 
 function App() {
     return (
         <>
             <GlobalStyle/>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<LoginPage/>}/>
-                    <Route path="/cadastro" element={<RegistrationPage/>}/>
-                    <Route path="/habitos" element={<HabitsPage/>}/>
-                </Routes>
-            </BrowserRouter>
+            <UserDataProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<LoginPage/>}/>
+                        <Route path="/cadastro" element={<RegistrationPage/>}/>
+                        <Route path="/habitos" element={<HabitsPage/>}/>
+                        <Route path="/hoje" element={<TodayPage/>}/>
+                        <Route path="/historico" element={<HistoryPage/>}/>
+                    </Routes>
+                </BrowserRouter>
+            </UserDataProvider>
         </>
     );
 }

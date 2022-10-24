@@ -1,11 +1,14 @@
 import styled from "styled-components";
-import Brand from "./Brand.svg";
+import { useContext } from "react";
+import { userDataContext } from "./Context";
 
 export default function Header() {
+    const {userData} = useContext(userDataContext);
+
     return (
         <HeaderStyles>
-            <h1>TrackIt</h1> 
-            <img src={Brand}/>
+            <h1>TrackIt</h1>
+            <img src={userData.image}/>
         </HeaderStyles> 
     );
 }
@@ -16,12 +19,12 @@ const HeaderStyles = styled.header`
     z-index: 1;
     width: 100%;
     height: 70px;
-    padding: 0 18px;
     background-color: #126BA5;
     box-shadow: 0 4px 4px rgba(0, 0, 0, .2);
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
+    column-gap: 191px;
 
     h1 {
         font-family: 'Playball', sans-serif;
@@ -35,5 +38,6 @@ const HeaderStyles = styled.header`
         width: 51px;
         height: 51px;
         border-radius: 50%;
+        object-fit: cover;
     }
 `;
