@@ -16,8 +16,6 @@ export default function TodayPage() {
     const navigate = useNavigate();
     const [refresh, setRefresh] = useState(false);
     const performed = Math.round(porcentage*(todaysHabits.length)/100);
-    console.log(porcentage);
-    console.log(todaysHabits.length);
 
     function handlePorcentage(savedHabitsData) {
         const doneQuantity = savedHabitsData.filter((element) => element.done).length;
@@ -28,7 +26,7 @@ export default function TodayPage() {
         } else {
             percent = Math.round(doneQuantity*100/(savedHabitsData.length));
         }
-        
+
         setPorcentage(percent);
     }
 
@@ -55,7 +53,10 @@ export default function TodayPage() {
         const match = ( (currentSequence === highestSequence) && (currentSequence !== 0) );
 
         return (
-            <TodaysHabitStyles key={habitData.id} done={habitData.done} match={match}>
+            <TodaysHabitStyles key={habitData.id}
+                               done={habitData.done}
+                               match={match}
+                               data-identifier="today-infos">
                 <div>
                     <h4>{habitData.name}</h4>
                     <p>
@@ -66,7 +67,7 @@ export default function TodayPage() {
                     </p>
                 </div>
                 <div>
-                    <img src={Check} onClick={() => {mark(habitData, habitData.done ? 'un' : '')}}/>
+                    <img src={Check} onClick={() => {mark(habitData, habitData.done ? 'un' : '')}} data-identifier="done-habit-btn"/>
                 </div>
             </TodaysHabitStyles>
         );
@@ -84,8 +85,8 @@ export default function TodayPage() {
         <>
             <Header/>
             <TodayStyles nonePerformed={performed === 0}>
-                <h2>{weekdays[dayjs().day()]}, {dayjs().format('DD/MM')}</h2>
-                <h3><Subtitle/></h3>
+                <h2 data-identifier="today-infos">{weekdays[dayjs().day()]}, {dayjs().format('DD/MM')}</h2>
+                <h3 data-identifier="today-infos"><Subtitle/></h3>
                 <section>
                     {todaysHabits.map(ShowTodaysHabit)}
                 </section>

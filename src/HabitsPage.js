@@ -31,7 +31,7 @@ export default function HabitsPage() {
 
     function ShowWeekday(day, i, chosenDays) {
         return (
-            <DayStyle key={i} selected={i in chosenDays}>{day}</DayStyle>
+            <DayStyle key={i} selected={i in chosenDays} data-identifier="week-day-btn">{day}</DayStyle>
         );
     }
 
@@ -52,8 +52,8 @@ export default function HabitsPage() {
         return (
             <ShownHabitStyles key={habitData.id}>
                 <div>
-                    <h3>{habitData.name}</h3>
-                    <img src={Trash} onClick={() => deleteHabit(habitData)}/>
+                    <h3 data-identifier="habit-name">{habitData.name}</h3>
+                    <img src={Trash} onClick={() => deleteHabit(habitData)} data-identifier="delete-habit-btn"/>
                 </div>
                 <ul>
                     {weekdayLetters.map((day, i) => ShowWeekday(day, i, chosenDays))}
@@ -76,7 +76,8 @@ export default function HabitsPage() {
         return (
             <DayStyle onClick={() => handleClickedList(i)}
                                key={i}
-                               selected={clickedDays.includes(i)}>
+                               selected={clickedDays.includes(i)}
+                               data-identifier="week-day-btn">
                 {dayLetter}
             </DayStyle>
         );
@@ -119,16 +120,19 @@ export default function HabitsPage() {
             <HabitsStyles formDisplay={formDisplay} withoutHabits={habits.length === 0}>
                 <section>
                     <h2>Meus hábitos</h2>
-                    <button onClick={() => setFormDisplay(true)}>+</button>
+                    <button onClick={() => setFormDisplay(true) } data-identifier="create-habit-btn">+</button>
                 </section>
                 <form onSubmit={submitHabit}>
-                    <input type="text" placeholder="nome do hábito" disabled={disabled}/>
+                    <input type="text"
+                           placeholder="nome do hábito"
+                           disabled={disabled}
+                           data-identifier="input-habit-name"/>
                     <ul>
                         {weekdayLetters.map(FormWeekday)}
                     </ul>
                     <div>
-                        <span onClick={() => setFormDisplay(false)}>Cancelar</span>
-                        <button type='submit' disabled={disabled}>
+                        <span onClick={() => setFormDisplay(false)} data-identifier="cancel-habit-create-btn">Cancelar</span>
+                        <button type='submit' disabled={disabled} data-identifier="save-habit-create-btn">
                             {disabled ? <ThreeDots color='#FFFFFF'/> : 'Salvar'}
                         </button>
                     </div>
@@ -136,7 +140,7 @@ export default function HabitsPage() {
                 <section>
                     {habits.map(ShowHabit)}
                 </section>
-                <p>
+                <p data-identifier="no-habit-message">
                     Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
                 </p>
             </HabitsStyles>

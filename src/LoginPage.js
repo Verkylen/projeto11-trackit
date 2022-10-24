@@ -42,14 +42,23 @@ export default function LoginPage() {
         <LoginStyles>
             <img src={Brand}/>
             <form onSubmit={login}>
-                <input type="email" placeholder="email" pattern="[a-z0-9_.-]{1,}[@][a-z]{1,}[.][a-z]{1,}(?:|[.][a-z]{1,})" disabled={disabled} required/>
-                <input type="password" placeholder="senha" disabled={disabled} required/>
-                <button type="submit" disabled={disabled}>
+                <input type="email"
+                       placeholder="email"
+                       pattern="[a-z0-9_.-]{1,}[@][a-z]{1,}[.][a-z]{1,}(?:|[.][a-z]{1,})"
+                       disabled={disabled}
+                       required
+                       data-identifier="input-email"/>
+                <input type="password"
+                       placeholder="senha"
+                       disabled={disabled}
+                       required
+                       data-identifier="input-password"/>
+                <button type="submit" disabled={disabled} data-identifier="login-btn">
                     {disabled ? <ThreeDots color="#FFFFFF"/> : 'Entrar'}
                 </button>
             </form>
             <p>
-                <Link to="/cadastro">Não tem uma conta? Cadastre-se!</Link>
+                <Link to="/cadastro" data-identifier="sign-up-action">Não tem uma conta? Cadastre-se!</Link>
             </p>
         </LoginStyles>
     );

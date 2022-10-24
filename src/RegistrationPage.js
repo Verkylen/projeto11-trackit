@@ -45,16 +45,34 @@ export default function RegistrationPage() {
         <LoginStyles>
             <img src={Brand}/>
             <form onSubmit={register} disabled={disabled}>
-                <input type="email" placeholder="email" pattern="[a-z0-9_.-]{1,}[@][a-z]{1,}[.][a-z]{1,}(?:|[.][a-z]{1,})" disabled={disabled} required/>
-                <input type="password" placeholder="senha" disabled={disabled} required/>
-                <input type="text" placeholder="nome" pattern="[A-Za-z0-9àâãéêèíóôõúü -]{1,}" disabled={disabled} required/>
-                <input type="url" placeholder="foto" disabled={disabled} required/>
+                <input type="email"
+                       placeholder="email"
+                       pattern="[a-z0-9_.-]{1,}[@][a-z]{1,}[.][a-z]{1,}(?:|[.][a-z]{1,})"
+                       disabled={disabled}
+                       required
+                       data-identifier="input-email"/>
+                <input type="password"
+                       placeholder="senha"
+                       disabled={disabled}
+                       required
+                       data-identifier="input-password"/>
+                <input type="text"
+                       placeholder="nome"
+                       pattern="[A-Za-z0-9àâãéêèíóôõúü -]{1,}"
+                       disabled={disabled}
+                       required
+                       data-identifier="input-name"/>
+                <input type="url"
+                       placeholder="foto"
+                       disabled={disabled}
+                       required
+                       data-identifier="input-photo"/>
                 <button type="submit" disabled={disabled}>
                     {disabled ? <ThreeDots color='#FFFFFF'/> : 'Cadastrar'}
                 </button>
             </form>
             <p>
-                <Link to="/">Já tem uma conta? Faça login!</Link>
+                <Link to="/" data-identifier="back-to-login-action">Já tem uma conta? Faça login!</Link>
             </p>            
         </LoginStyles>
     );

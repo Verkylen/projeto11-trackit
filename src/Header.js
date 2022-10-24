@@ -8,7 +8,7 @@ export default function Header() {
     return (
         <HeaderStyles>
             <h1>TrackIt</h1>
-            <img src={userData.image}/>
+            <img src={userData.image} data-identifier="avatar"/>
         </HeaderStyles> 
     );
 }

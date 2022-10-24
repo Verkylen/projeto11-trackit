@@ -11,7 +11,7 @@ export default function Footer() {
     return (
         <FooterStyles>
             <span>
-                <Link to='/habitos'>Hábitos</Link>
+                <Link to='/habitos' data-identifier="habit-page-action">Hábitos</Link>
             </span>
             <Link to='/hoje'>
                 <div>
@@ -24,12 +24,11 @@ export default function Footer() {
                                 backgroundColor: "#52B6FF",
                                 textColor: "#ffffff",
                                 pathColor: "#ffffff",
-                                trailColor: "transparent"})}
-                    />
+                                trailColor: "transparent"})}/>
                 </div>
             </Link>
             <span>
-                <Link to='/historico'>Histórico</Link>
+                <Link to='/historico' data-identifier="historic-page-action">Histórico</Link>
             </span>
         </FooterStyles>
     );
