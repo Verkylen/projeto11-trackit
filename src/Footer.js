@@ -1,14 +1,32 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { useContext } from "react";
+import { userDataContext } from "./Context";
 
 export default function Footer() {
+    const {porcentage} = useContext(userDataContext);
+
     return (
         <FooterStyles>
             <span>
                 <Link to='/habitos'>Hábitos</Link>
             </span>
             <Link to='/hoje'>
-                <div>Hoje</div>
+                <div>
+                    <CircularProgressbar
+                            value={porcentage}
+                            text={'Hoje'}
+                            background
+                            backgroundPadding={6}
+                            styles={buildStyles({
+                                backgroundColor: "#52B6FF",
+                                textColor: "#ffffff",
+                                pathColor: "#ffffff",
+                                trailColor: "transparent"})}
+                    />
+                </div>
             </Link>
             <span>
                 <Link to='/historico'>Histórico</Link>
@@ -53,15 +71,8 @@ const FooterStyles = styled.footer`
             width: 91px;
             height: 91px;
             border-radius: 50%;
-            background-color: #52B6FF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Lexend Deca';
-            font-weight: 400;
-            font-size: 17.976px;
-            line-height: 22px;
-            color: #FFFFFF;
+
+            font-family: 'Lexend Deca', sans-serif;
         }
     }
 `;

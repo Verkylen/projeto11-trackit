@@ -11,38 +11,38 @@ import { useNavigate } from "react-router-dom";
 const weekdays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
 export default function TodayPage() {
-    const {userData} = useContext(userDataContext);
+    const {userData, porcentage, setPorcentage} = useContext(userDataContext);
     const [todaysHabits, setTodaysHabits] = useState([]);
     const navigate = useNavigate();
-    const [performed, setPerformed] = useState(0);
     const [refresh, setRefresh] = useState(false);
+    const performed = Math.round(porcentage*(todaysHabits.length)/100);
+
+    function handlePorcentage(savedHabitsData) {
+        const doneQuantity = savedHabitsData.filter((element) => element.done).length;
+        const percent = Math.round(doneQuantity*100/(savedHabitsData.length));
+        setPorcentage(percent);
+    }
 
     function request() {
         const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
         const config = {headers: {'Authorization': `Bearer ${userData.token}`}};
         axios.get(URL, config)
-            .then((savedHabits) => setTodaysHabits(savedHabits.data))
+            .then((savedHabits) => {setTodaysHabits(savedHabits.data); handlePorcentage(savedHabits.data);})
             .catch(() => navigate('/'));
     }
 
     useEffect(request, [refresh]);
 
     function mark(habitData, prefix) {
-        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitData.id}/check`;
+        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitData.id}/${prefix}check`;
         const config = {headers: {'Authorization': `Bearer ${userData.token}`}};
-        axios.post(URL, config)
-            .then((response) => {setRefresh(!refresh); console.log(response);})
-            .catch(console.log);
+        axios.post(URL, {}, config)
+            .then(() => {setRefresh(!refresh)});
     }
 
     function ShowTodaysHabit(habitData) {
         const currentSequence = habitData.currentSequence;
         const highestSequence = habitData.highestSequence;
-        
-        if (habitData.done) {
-            setPerformed(performed + 1);
-        }
-
         const match = ( (currentSequence === highestSequence) && (currentSequence !== 0) );
 
         return (
@@ -57,7 +57,7 @@ export default function TodayPage() {
                     </p>
                 </div>
                 <div>
-                    <img src={Check} onClick={() => mark(habitData)}/>
+                    <img src={Check} onClick={() => {mark(habitData, habitData.done ? 'un' : '')}}/>
                 </div>
             </TodaysHabitStyles>
         );
