@@ -16,10 +16,19 @@ export default function TodayPage() {
     const navigate = useNavigate();
     const [refresh, setRefresh] = useState(false);
     const performed = Math.round(porcentage*(todaysHabits.length)/100);
+    console.log(porcentage);
+    console.log(todaysHabits.length);
 
     function handlePorcentage(savedHabitsData) {
         const doneQuantity = savedHabitsData.filter((element) => element.done).length;
-        const percent = Math.round(doneQuantity*100/(savedHabitsData.length));
+        let percent;
+
+        if (savedHabitsData.length === 0) {
+            percent = 0;
+        } else {
+            percent = Math.round(doneQuantity*100/(savedHabitsData.length));
+        }
+        
         setPorcentage(percent);
     }
 
